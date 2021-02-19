@@ -31,7 +31,7 @@ spec:
               - serviceAccountToken:
                   path: api-token
                   expirationSeconds: 600
-                  audience: service2
+                  audience: service-2
       containers:
         - name: api
           image: primozh/k8s-sa-volume-demo-api
@@ -39,7 +39,7 @@ spec:
             - name: PORT
               value: ":8080"
             - name: SERVICE_2_CONNECTION_STRING
-              value: http://service2
+              value: http://service-2:8081
           resources:
             limits:
               memory: "128Mi"
@@ -58,6 +58,7 @@ metadata:
 spec:
   selector:
     app: api
+  type: NodePort
   ports:
-    - port: 80
-      targetPort: 8081
+    - port: 8080
+      targetPort: 8080
